@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.how2java.tmall.mapper.CategoryMapper">
+    <select id="list" resultType="Category">
+        select * from   category         order by id desc
+        <if test="start!=null and count!=null">
+            limit #{start},#{count}
+        </if>
+
+    </select>
+    <select id="total" resultType="int">
+        select count(*) from category
+    </select>
+    <insert id="add"  keyProperty="id"  useGeneratedKeys="true" parameterType="Category" >
+        insert into category ( name ) values (#{name})
+    </insert>
+</mapper>
