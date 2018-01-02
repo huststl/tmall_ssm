@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="tmall_ssm:war exploded">
+    <output-path>$PROJECT_DIR$/target/tmall_ssm</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="tmall_ssm" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/tmall_ssm/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="tmall_ssm/web/Web" />
+    </root>
+  </artifact>
+</component>
