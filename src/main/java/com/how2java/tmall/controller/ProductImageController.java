@@ -1,21 +1,26 @@
 package com.how2java.tmall.controller;
 
-import com.how2java.tmall.pojo.Product;
-import com.how2java.tmall.pojo.ProductImage;
-import com.how2java.tmall.service.ProductImageService;
-import com.how2java.tmall.service.ProductService;
-import com.how2java.tmall.util.ImageUtil;
-import com.how2java.tmall.util.UploadedImageFile;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.List;
+
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.imageio.ImageIO;
-import javax.servlet.http.HttpSession;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.List;
+import com.how2java.tmall.pojo.Product;
+import com.how2java.tmall.pojo.ProductImage;
+import com.how2java.tmall.service.ProductImageService;
+import com.how2java.tmall.service.ProductService;
+import com.how2java.tmall.util.ImageUtil;
+import com.how2java.tmall.util.Page;
+import com.how2java.tmall.util.UploadedImageFile;
+
 
 @Controller
 @RequestMapping("")
@@ -25,6 +30,7 @@ public class ProductImageController {
 
     @Autowired
     ProductImageService productImageService;
+
 
     @RequestMapping("admin_productImage_add")
     public String add(ProductImage  pi, HttpSession session, UploadedImageFile uploadedImageFile) {
@@ -90,7 +96,9 @@ public class ProductImageController {
             imageFile.delete();
         }
 
+
         productImageService.delete(id);
+
 
         return "redirect:admin_productImage_list?pid="+pi.getPid();
     }
@@ -100,6 +108,7 @@ public class ProductImageController {
         Product p =productService.get(pid);
         List<ProductImage> pisSingle = productImageService.list(pid, ProductImageService.type_single);
         List<ProductImage> pisDetail = productImageService.list(pid, ProductImageService.type_detail);
+
 
         model.addAttribute("p", p);
         model.addAttribute("pisSingle", pisSingle);

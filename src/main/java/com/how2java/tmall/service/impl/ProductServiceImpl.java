@@ -21,7 +21,6 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     ProductImageService productImageService;
 
-
     @Override
     public void add(Product p) {
         productMapper.insert(p);
@@ -40,9 +39,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product get(int id) {
         Product p = productMapper.selectByPrimaryKey(id);
+        setFirstProductImage(p);
         setCategory(p);
         return p;
     }
+
 
     public void setCategory(List<Product> ps){
         for (Product p : ps)
@@ -61,22 +62,23 @@ public class ProductServiceImpl implements ProductService {
         example.setOrderByClause("id desc");
         List result = productMapper.selectByExample(example);
         setCategory(result);
+        setFirstProductImage(result);
         return result;
     }
 
     @Override
     public void setFirstProductImage(Product p) {
-        List<ProductImage> pis = productImageService.list(p.getId(),ProductImageService.type_single);
-        if(!pis.isEmpty()){
+        List<ProductImage> pis = productImageService.list(p.getId(), ProductImageService.type_single);
+        if (!pis.isEmpty()) {
             ProductImage pi = pis.get(0);
             p.setFirstProductImage(pi);
         }
-
     }
 
-    public void setFirstProductImage(List<Product> ps){
-        for(Product p:ps){
+    public void setFirstProductImage(List<Product> ps) {
+        for (Product p : ps) {
             setFirstProductImage(p);
         }
     }
+
 }

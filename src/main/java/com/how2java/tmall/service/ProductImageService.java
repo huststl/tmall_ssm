@@ -1,8 +1,8 @@
 package com.how2java.tmall.service;
+ 
+import java.util.List;
 
 import com.how2java.tmall.pojo.ProductImage;
-
-import java.util.List;
 
 public interface ProductImageService {
 
@@ -13,6 +13,5 @@ public interface ProductImageService {
     void delete(int id);
     void update(ProductImage pi);
     ProductImage get(int id);
-    List list(int pid,String type);
-
+    List list(int pid, String type);
 }
