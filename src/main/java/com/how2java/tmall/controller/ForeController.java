@@ -288,7 +288,7 @@ public class ForeController {
         return "redirect:forealipay?oid="+order.getId() +"&total="+total;
     }
 
-
+    //订单支付
     @RequestMapping("forepayed")
     public String payed(int oid, float total, Model model) {
         Order order = orderService.get(oid);
