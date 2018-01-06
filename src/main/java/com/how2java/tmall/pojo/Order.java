@@ -56,7 +56,7 @@ public class Order {
     }
 
     public void setOrderCode(String orderCode) {
-        this.orderCode = orderCode == null ? null : orderCode.trim();
+        this.orderCode = orderCode;
     }
 
     public String getAddress() {
@@ -64,7 +64,7 @@ public class Order {
     }
 
     public void setAddress(String address) {
-        this.address = address == null ? null : address.trim();
+        this.address = address;
     }
 
     public String getPost() {
@@ -72,7 +72,7 @@ public class Order {
     }
 
     public void setPost(String post) {
-        this.post = post == null ? null : post.trim();
+        this.post = post;
     }
 
     public String getReceiver() {
@@ -80,7 +80,7 @@ public class Order {
     }
 
     public void setReceiver(String receiver) {
-        this.receiver = receiver == null ? null : receiver.trim();
+        this.receiver = receiver;
     }
 
     public String getMobile() {
@@ -88,7 +88,7 @@ public class Order {
     }
 
     public void setMobile(String mobile) {
-        this.mobile = mobile == null ? null : mobile.trim();
+        this.mobile = mobile;
     }
 
     public String getUserMessage() {
@@ -96,7 +96,7 @@ public class Order {
     }
 
     public void setUserMessage(String userMessage) {
-        this.userMessage = userMessage == null ? null : userMessage.trim();
+        this.userMessage = userMessage;
     }
 
     public Date getCreateDate() {
@@ -144,7 +144,7 @@ public class Order {
     }
 
     public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
+        this.status = status;
     }
 
     public List<OrderItem> getOrderItems() {
@@ -154,8 +154,31 @@ public class Order {
     public void setOrderItems(List<OrderItem> orderItems) {
         this.orderItems = orderItems;
     }
-    
-    
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public float getTotal() {
+        return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
+    }
+
+    public int getTotalNumber() {
+        return totalNumber;
+    }
+
+    public void setTotalNumber(int totalNumber) {
+        this.totalNumber = totalNumber;
+    }
+
     public static void main(String args[]){
         Order o  = new Order();
         o.setStatus(OrderService.delete);
@@ -189,27 +212,5 @@ public class Order {
     }
 
 
-    public float getTotal() {
-        return total;
-    }
 
-    public void setTotal(float total) {
-        this.total = total;
-    }
-
-    public int getTotalNumber() {
-        return totalNumber;
-    }
-
-    public void setTotalNumber(int totalNumber) {
-        this.totalNumber = totalNumber;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }

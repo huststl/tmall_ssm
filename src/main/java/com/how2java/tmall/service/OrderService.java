@@ -1,9 +1,9 @@
 package com.how2java.tmall.service;
  
-import java.util.List;
-
 import com.how2java.tmall.pojo.Order;
 import com.how2java.tmall.pojo.OrderItem;
+
+import java.util.List;
 
 public interface OrderService {
 
@@ -21,4 +21,5 @@ public interface OrderService {
     void update(Order c);
     Order get(int id);
     List list();
+    List list(int uid,String excludedStatus);
 }

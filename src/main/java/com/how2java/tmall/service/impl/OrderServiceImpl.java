@@ -1,20 +1,18 @@
 package com.how2java.tmall.service.impl;
 
-import java.util.List;
-
-import com.how2java.tmall.pojo.OrderItem;
-import com.how2java.tmall.service.OrderItemService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.how2java.tmall.mapper.OrderMapper;
 import com.how2java.tmall.pojo.Order;
 import com.how2java.tmall.pojo.OrderExample;
-import com.how2java.tmall.pojo.User;
+import com.how2java.tmall.pojo.OrderItem;
+import com.how2java.tmall.service.OrderItemService;
 import com.how2java.tmall.service.OrderService;
 import com.how2java.tmall.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 
 @Service
@@ -72,6 +70,14 @@ public class OrderServiceImpl implements OrderService {
         example.setOrderByClause("id desc");
         return orderMapper.selectByExample(example);
 
+    }
+
+    @Override
+    public List list(int uid, String excludedStatus) {
+        OrderExample example = new OrderExample();
+        example.createCriteria().andUidEqualTo(uid).andStatusEqualTo(excludedStatus);
+        example.setOrderByClause("id desc");
+        return orderMapper.selectByExample(example);
     }
 
 
