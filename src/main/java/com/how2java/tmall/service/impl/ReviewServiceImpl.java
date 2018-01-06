@@ -1,22 +1,22 @@
 package com.how2java.tmall.service.impl;
 
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import com.how2java.tmall.mapper.ReviewMapper;
 import com.how2java.tmall.pojo.Review;
 import com.how2java.tmall.pojo.ReviewExample;
 import com.how2java.tmall.pojo.User;
 import com.how2java.tmall.service.ReviewService;
 import com.how2java.tmall.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
-public class ReviewServiceImpl implements ReviewService{
+public class ReviewServiceImpl implements ReviewService {
     @Autowired
     ReviewMapper reviewMapper;
     @Autowired
     UserService userService;
+
     @Override
     public void add(Review c) {
         reviewMapper.insert(c);
@@ -37,25 +37,25 @@ public class ReviewServiceImpl implements ReviewService{
         return reviewMapper.selectByPrimaryKey(id);
     }
 
-    @Override
-    public List<Review> list(int pid) {
-        ReviewExample example = new ReviewExample();
+    public List<Review> list(int pid){
+        ReviewExample example =new ReviewExample();
         example.createCriteria().andPidEqualTo(pid);
         example.setOrderByClause("id desc");
 
-        List<Review> result = reviewMapper.selectByExample(example);
+        List<Review> result =reviewMapper.selectByExample(example);
         setUser(result);
         return result;
     }
 
     public void setUser(List<Review> reviews){
-        for(Review review : reviews){
-            setUser(reviews);
+        for (Review review : reviews) {
+            setUser(review);
         }
     }
-    public void setUser(Review review){
+
+    private void setUser(Review review) {
         int uid = review.getUid();
-        User user = userService.get(uid);
+        User user =userService.get(uid);
         review.setUser(user);
     }
 
@@ -63,4 +63,5 @@ public class ReviewServiceImpl implements ReviewService{
     public int getCount(int pid) {
         return list(pid).size();
     }
+
 }

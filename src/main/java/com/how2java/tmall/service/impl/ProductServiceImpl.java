@@ -1,16 +1,21 @@
 package com.how2java.tmall.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.how2java.tmall.mapper.ProductMapper;
 import com.how2java.tmall.pojo.Category;
 import com.how2java.tmall.pojo.Product;
 import com.how2java.tmall.pojo.ProductExample;
 import com.how2java.tmall.pojo.ProductImage;
-import com.how2java.tmall.service.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.how2java.tmall.service.CategoryService;
+import com.how2java.tmall.service.OrderItemService;
+import com.how2java.tmall.service.ProductImageService;
+import com.how2java.tmall.service.ProductService;
+import com.how2java.tmall.service.ReviewService;
 @Service
 public class ProductServiceImpl implements ProductService {
     @Autowired
@@ -23,7 +28,6 @@ public class ProductServiceImpl implements ProductService {
     OrderItemService orderItemService;
     @Autowired
     ReviewService reviewService;
-
 
     @Override
     public void add(Product p) {
@@ -65,8 +69,8 @@ public class ProductServiceImpl implements ProductService {
         example.createCriteria().andCidEqualTo(cid);
         example.setOrderByClause("id desc");
         List result = productMapper.selectByExample(example);
-        setCategory(result);
         setFirstProductImage(result);
+        setCategory(result);
         return result;
     }
 
@@ -81,15 +85,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void fill(List<Category> cs) {
-        for (Category c:cs){
+        for (Category c : cs) {
             fill(c);
         }
-    }
-
-    @Override
-    public void fill(Category category) {
-        List<Product> ps = list(category.getId());
-        category.setProducts(ps);
     }
 
     @Override
@@ -119,16 +117,15 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void setSaleAndReviewNumber(List<Product> ps) {
-        for(Product p:ps){
+        for (Product p : ps) {
             setSaleAndReviewNumber(p);
         }
-
     }
 
     @Override
     public List<Product> search(String keyword) {
         ProductExample example = new ProductExample();
-        example.createCriteria().andNameLike("%"+keyword);
+        example.createCriteria().andNameLike("%" + keyword + "%");
         example.setOrderByClause("id desc");
         List result = productMapper.selectByExample(example);
         setFirstProductImage(result);
@@ -136,10 +133,15 @@ public class ProductServiceImpl implements ProductService {
         return result;
     }
 
+    @Override
+    public void fill(Category c) {
+        List<Product> ps = list(c.getId());
+        c.setProducts(ps);
+    }
+
     public void setFirstProductImage(List<Product> ps) {
         for (Product p : ps) {
             setFirstProductImage(p);
         }
     }
-
 }
