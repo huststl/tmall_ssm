@@ -13,3 +13,8 @@
 可以下载后部署到本地调试
 
 接下来就是一些bug修复功能，有些地方还需要完善！
+
+
+我将完整源码上传于此，大家可以下载借鉴着看
+https://pan.baidu.com/s/1srPVTPnmQXjqRatDJUXleQ 密码：dk4f
+
